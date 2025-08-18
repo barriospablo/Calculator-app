@@ -7,13 +7,27 @@ import React from "react";
 import { View } from "react-native";
 
 const CalculatorApp = () => {
-  const { formula, buildNumber, clean, toggleSign, deleteLast } =
-    useCalculator();
+  const {
+    formula,
+    prevNumber,
+    buildNumber,
+    clean,
+    toggleSign,
+    deleteLast,
+    divideOperation,
+    multiplyOperation,
+    subtractOperation,
+    addOperation,
+  } = useCalculator();
   return (
     <View style={globalStyles.calculatorContainer}>
       <View style={{ paddingHorizontal: 30, marginBottom: 20 }}>
         <ThemeText variant="h1">{formula}</ThemeText>
-        <ThemeText variant="h2">4</ThemeText>
+        {formula === prevNumber ? (
+          <ThemeText variant="h2"> </ThemeText>
+        ) : (
+          <ThemeText variant="h2">{prevNumber}</ThemeText>
+        )}
       </View>
       {/* Lista de botones */}
       <View style={globalStyles.row}>
@@ -36,9 +50,9 @@ const CalculatorApp = () => {
           blackText
         />
         <CalculatorButton
-          label="%"
+          label="/"
           color={Colors.oragne}
-          onPress={() => console.log("Pressed")}
+          onPress={divideOperation}
         />
       </View>
 
@@ -49,7 +63,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label="*"
           color={Colors.oragne}
-          onPress={() => console.log("Pressed")}
+          onPress={multiplyOperation}
         />
       </View>
 
@@ -60,7 +74,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label="-"
           color={Colors.oragne}
-          onPress={() => console.log("Pressed")}
+          onPress={subtractOperation}
         />
       </View>
       <View style={globalStyles.row}>
@@ -70,7 +84,7 @@ const CalculatorApp = () => {
         <CalculatorButton
           label="+"
           color={Colors.oragne}
-          onPress={() => console.log("Pressed")}
+          onPress={addOperation}
         />
       </View>
       <View style={globalStyles.row}>
